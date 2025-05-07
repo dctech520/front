@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
       buttonsToDisable.forEach(button => {
         if (button instanceof HTMLButtonElement) {
           button.disabled = true;
-          button.style.opacity = '1';
           button.style.cursor = 'not-allowed';
         } else if (button.tagName === 'SPZ-PAYPAL') {
           button.style.display = 'none';
