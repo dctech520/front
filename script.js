@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const keywords = [
     'v-neck backless dress',
     'sunshine tie strap dress',
-    'new-keyword-3',
+    'Halter Pressure Pleat Dress',
     'another\\-keyword'
   ].map(keyword => keyword.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
