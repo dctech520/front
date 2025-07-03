@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     'sunshine tie strap dress',
     'Halter Pressure Pleat Dress',
     'Floral Strappy V-Neck Dress'
+    'Raglan Floral Sleeve Dress'
   ].map(keyword => keyword.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
   const exactMatchRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'i');
