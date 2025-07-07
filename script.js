@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
   const isMobileViewport = window.innerWidth < 768;
   if (!isMobileViewport) return;
 
-  
+  const TARGET_COUNTRIES = ['US', 'CA'];
+
   function disableButtons() {
     const buttonsToDisable = document.querySelectorAll(`
       .add-to-cart-button, 
@@ -25,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  
   function checkProductKeywords() {
     const productTitle = document.querySelector('.pd-info-title.product-info-title');
     if (!productTitle) return false;
@@ -43,73 +43,41 @@ document.addEventListener('DOMContentLoaded', function() {
     return exactMatchRegex.test(titleText);
   }
 
-  
-  function checkUSByCloudflare() {
+  function checkTargetCountryByCloudflare() {
     return fetch('//www.cloudflare.com/cdn-cgi/trace')
       .then(response => response.text())
       .then(data => {
         const match = data.match(/loc=([A-Z]{2})/);
-        return match && match[1] === 'US';
+        return match && TARGET_COUNTRIES.includes(match[1]);
       })
       .catch(() => false);
   }
 
-  
-  function checkUSByWtfIsMyIP() {
+  function checkTargetCountryByWtfIsMyIP() {
     return fetch('https://wtfismyip.com/json')
       .then(response => response.json())
       .then(data => {
-        return data.YourFuckingCountryCode === 'US';
+        return TARGET_COUNTRIES.includes(data.YourFuckingCountryCode);
       })
       .catch(() => false);
   }
 
-  
-  function checkUSByShopify() {
-    if (!window.Shopify || !window.Shopify.routes || !window.Shopify.routes.root) {
-      return Promise.resolve(false);
-    }
-    
-    return fetch(
-      window.Shopify.routes.root +
-      "browsing_context_suggestions.json" +
-      "?country[enabled]=true" +
-      `&country[exclude]=${window.Shopify.country}` +
-      "&language[enabled]=true" +
-      `&language[exclude]=${window.Shopify.language}`
-    )
-      .then(response => response.json())
-      .then(value => {
-        const loc_code = value.detected_values.country.handle;
-        return loc_code === 'US';
-      })
-      .catch(() => false);
-  }
-
-  
   async function performChecks() {
-    
     if (checkProductKeywords()) {
       disableButtons();
       return;
     }
 
-    
     const ipChecks = await Promise.all([
-      checkUSByCloudflare(),
-      checkUSByWtfIsMyIP(),
-      checkUSByShopify()
+      checkTargetCountryByCloudflare(),
+      checkTargetCountryByWtfIsMyIP()
     ]);
 
-    
-    if (ipChecks.some(isUS => isUS)) {
+    if (ipChecks.some(isTargetCountry => isTargetCountry)) {
       disableButtons();
     }
   }
 
-  
   performChecks();
-
-  
   setTimeout(performChecks, 1000);
 });
