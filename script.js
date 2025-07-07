@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const titleText = productTitle.textContent.toLowerCase();
     const keywords = [
       'v-neck backless dress',
-      'sunshine tie strap dress',
+      'Sunshine Tie Strap Dress',
       'Halter Pressure Pleat Dress',
       'Floral Strappy V-Neck Dress',
       'Backless Printed Mini Dress',
