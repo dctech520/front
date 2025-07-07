@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', function() {
       .add-to-cart-button, 
       [role="addToCart"], 
       [role="buyNow"], 
+      [role="checkout"],
+      .cart-summary__checkout-btn,
       spz-paypal
     `);
 
@@ -22,7 +24,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     document.querySelectorAll('button').forEach(btn => {
       btn.onclick = null;
-      btn.addEventListener('click', e => e.preventDefault());
+      btn.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    });
+
+    const checkoutButtons = document.querySelectorAll('[role="checkout"]');
+    checkoutButtons.forEach(btn => {
+      btn.removeAttribute('@tap');
+      ['click', 'tap', 'touchstart', 'touchend'].forEach(eventType => {
+        btn.addEventListener(eventType, e => {
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        }, true);
+      });
     });
   }
 
