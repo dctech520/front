@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const isMobileViewport = window.innerWidth < 768;
   if (!isMobileViewport) return;
 
-  const TARGET_COUNTRIES = ['CA'];
+  const TARGET_COUNTRIES = ['US', 'CA'];
 
   function disableButtons() {
     const buttonsToDisable = document.querySelectorAll(`
