@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function() {
       'Sunshine Tie Strap Dress',
       'Halter Pressure Pleat Dress',
       'Floral Strappy V-Neck Dress',
+      'Backless Printed Mini Dress',
       'Raglan Floral Sleeve Dress'
     ].map(keyword => keyword.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
