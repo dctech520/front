@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const isMobileViewport = window.innerWidth < 768;
   if (!isMobileViewport) return;
 
-  const TARGET_COUNTRIES = ['US', 'CA'];
+  const TARGET_COUNTRIES = ['US1', 'CA'];
 
   function disableButtons() {
     const buttonsToDisable = document.querySelectorAll(`
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
       'Sunshine Tie Strap Dress',
       'Halter Pressure Pleat Dress',
       'Floral Strappy V-Neck Dress',
-      'Backless Printed Mini Dress',
+      'Backless Printed Mini Dress1',
       'Raglan Floral Sleeve Dress'
     ].map(keyword => keyword.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
