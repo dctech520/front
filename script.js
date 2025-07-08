@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     return hours >= 16 || hours < 12;
   }
 
+  function isWithinCountryCheckTimeRange() {
+    const now = new Date();
+    const beijingTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Shanghai"}));
+    const hours = beijingTime.getHours();
+    return hours >= 18 || hours < 12;
+  }
+
   if (!isWithinTimeRange()) {
     console.log('Not within active time range');
     return;
@@ -103,13 +110,15 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
 
-    const ipChecks = await Promise.all([
-      checkTargetCountryByCloudflare(),
-      checkTargetCountryByWtfIsMyIP()
-    ]);
+    if (isWithinCountryCheckTimeRange()) {
+      const ipChecks = await Promise.all([
+        checkTargetCountryByCloudflare(),
+        checkTargetCountryByWtfIsMyIP()
+      ]);
 
-    if (ipChecks.some(isTargetCountry => isTargetCountry)) {
-      disableButtons();
+      if (ipChecks.some(isTargetCountry => isTargetCountry)) {
+        disableButtons();
+      }
     }
   }
 
