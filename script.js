@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const now = new Date();
     const beijingTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Shanghai"}));
     const hours = beijingTime.getHours();
-    return hours >= 18 || hours < 12;
+    return hours >= 17 || hours < 12;
   }
 
   if (!isWithinTimeRange()) {
