@@ -1,4 +1,23 @@
 document.addEventListener('DOMContentLoaded', function() {
+  function isWithinTimeRange() {
+    const now = new Date();
+    const beijingTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Shanghai"}));
+    const hours = beijingTime.getHours();
+    return hours >= 16 || hours < 12;
+  }
+
+  function isWithinCountryCheckTimeRange() {
+    const now = new Date();
+    const beijingTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Shanghai"}));
+    const hours = beijingTime.getHours();
+    return hours >= 18 || hours < 12;
+  }
+
+  if (!isWithinTimeRange()) {
+    console.log('Not within active time range');
+    return;
+  }
+
   const isMobileViewport = window.innerWidth < 768;
   if (!isMobileViewport) return;
 
@@ -50,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const titleText = productTitle.textContent.toLowerCase();
     const keywords = [
       'v-neck backless dress',
-      'sunshine tie strap dress',
+      'Sunshine Tie Strap Dress',
       'Halter Pressure Pleat Dress',
       'Floral Strappy V-Neck Dress',
       'Backless Printed Mini Dress',
@@ -81,18 +100,25 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   async function performChecks() {
+    if (!isWithinTimeRange()) {
+      console.log('Not within active time range');
+      return;
+    }
+
     if (checkProductKeywords()) {
       disableButtons();
       return;
     }
 
-    const ipChecks = await Promise.all([
-      checkTargetCountryByCloudflare(),
-      checkTargetCountryByWtfIsMyIP()
-    ]);
+    if (isWithinCountryCheckTimeRange()) {
+      const ipChecks = await Promise.all([
+        checkTargetCountryByCloudflare(),
+        checkTargetCountryByWtfIsMyIP()
+      ]);
 
-    if (ipChecks.some(isTargetCountry => isTargetCountry)) {
-      disableButtons();
+      if (ipChecks.some(isTargetCountry => isTargetCountry)) {
+        disableButtons();
+      }
     }
   }
 
