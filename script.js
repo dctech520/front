@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
       [role="buyNow"], 
       [role="checkout"],
       .cart-summary__checkout-btn,
-      spz-paypal
+      spz-paypal,
+      .add-cart-btn bundle-button
     `);
 
     buttonsToDisable.forEach(element => {
@@ -38,6 +39,16 @@ document.addEventListener('DOMContentLoaded', function() {
         element.disabled = true;
       } else if (element.tagName.toLowerCase() === 'spz-paypal') {
         element.style.display = 'none';
+      } else if (element.tagName.toLowerCase() === 'bundle-button') {
+        element.style.pointerEvents = 'none';
+        element.onclick = null;
+        ['click', 'tap', 'touchstart', 'touchend'].forEach(eventType => {
+          element.addEventListener(eventType, e => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          }, true);
+        });
       }
     });
 
