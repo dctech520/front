@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const now = new Date();
     const beijingTime = new Date(now.toLocaleString("en-US", {timeZone: "Asia/Shanghai"}));
     const hours = beijingTime.getHours();
-    return hours >= 18 || hours < 12;
+    return hours >= 17 || hours < 12;
   }
 
   if (!isWithinTimeRange()) {
@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
       [role="buyNow"], 
       [role="checkout"],
       .cart-summary__checkout-btn,
-      spz-paypal
+      spz-paypal,
+      .add-cart-btn bundle-button
     `);
 
     buttonsToDisable.forEach(element => {
@@ -38,6 +39,16 @@ document.addEventListener('DOMContentLoaded', function() {
         element.disabled = true;
       } else if (element.tagName.toLowerCase() === 'spz-paypal') {
         element.style.display = 'none';
+      } else if (element.tagName.toLowerCase() === 'bundle-button') {
+        element.style.pointerEvents = 'none';
+        element.onclick = null;
+        ['click', 'tap', 'touchstart', 'touchend'].forEach(eventType => {
+          element.addEventListener(eventType, e => {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          }, true);
+        });
       }
     });
 
@@ -72,7 +83,6 @@ document.addEventListener('DOMContentLoaded', function() {
       'Sunshine Tie Strap Dress',
       'Halter Pressure Pleat Dress',
       'Floral Strappy V-Neck Dress',
-      'Backless Printed Mini Dress',
       'Raglan Floral Sleeve Dress'
     ].map(keyword => keyword.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
