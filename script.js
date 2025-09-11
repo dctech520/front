@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const isMobileViewport = window.innerWidth < 768;
   if (!isMobileViewport) return;
 
-  const TARGET_COUNTRIES = ['US', 'CA'];
+  const TARGET_COUNTRIES = ['', ''];
 
   function disableButtons() {
     const buttonsToDisable = document.querySelectorAll(`
@@ -79,10 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const titleText = productTitle.textContent.toLowerCase();
     const keywords = [
-      'v-neck backless dress',
-      'Sunshine Tie Strap Dress',
-      'Halter Pressure Pleat Dress',
-      'Floral Strappy V-Neck Dress',
       'Raglan Floral Sleeve Dress',
       'Pleated V-neck Tie-waist Dress',
       'Double-shoulder Split Zipper Dress',
