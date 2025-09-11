@@ -83,8 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
       'Sunshine Tie Strap Dress',
       'Halter Pressure Pleat Dress',
       'Floral Strappy V-Neck Dress',
-      'Raglan Floral Sleeve Dress'
-      'Pleated V-neck Tie-waist Dress'
+      'Raglan Floral Sleeve Dress',
+      'Pleated V-neck Tie-waist Dress',
+      'Double-shoulder Split Zipper Dress'
     ].map(keyword => keyword.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
     const exactMatchRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'i');
