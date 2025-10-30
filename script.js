@@ -84,7 +84,9 @@ document.addEventListener('DOMContentLoaded', function() {
       'Double-shoulder Split Zipper Dress',
       'Ruffled V-neck Open-back Dress',
       'Off-the-shoulder Slit Dress',
-      'One-Shoulder Ruffle Collar Slit Dress'
+      'One-Shoulder Ruffle Collar Slit Dress',
+      'One-Shoulder Floral Tulle Dress',
+      'Cowl Printed Open-back Tie Dress
     ].map(keyword => keyword.toLowerCase().replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
 
     const exactMatchRegex = new RegExp(`\\b(${keywords.join('|')})\\b`, 'i');
